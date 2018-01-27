@@ -1,7 +1,5 @@
 # twitch-now :tv: :movie_camera:
-Last project on intermediate Frontend project on FreeCodeCamp.
-
-Twitch-now is an web application where a user can search for online/offlife channels on Twtich.tv 
+Last project on intermediate Frontend project on FreeCodeCamp. Twitch-now is an web application where a user can search for online/offlife channels on Twtich.tv 
 Click [here]() to check it out now :stuck_out_tongue: !
 
 ### user story
