@@ -9,14 +9,26 @@ function makeUrl(user) {
   return url
 }
 
+
+
 // Script and JSONP requests are not subject to the same origin policy restrictions.
-function fetchData (url) {
+function fetchData(url, callback) {
   $.getJSON(url, function (data) {
-    console.log(data.stream);
-    console.log('data has been loaded');
+    callback(data);
   });
 }
 
-users.forEach(function(user) {
-  fetchData(makeUrl(user));
+
+$( '#all' ).on( 'click', function() {
+  users.forEach(function (user) {
+    fetchData(makeUrl(user), function(data) {
+      var info = JSON.stringify(data);
+      $( '#list').append(`<div>${info}</div>`);
+    });
+  });
 });
+
+// users.forEach(function(user) {
+//   fetchData(makeUrl(user));
+// });
+//
