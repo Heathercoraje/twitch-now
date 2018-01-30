@@ -1,3 +1,23 @@
-div {
-  font-size: 3rem;
+body {
+  background-color: #F3E37C;
+}
+
+.container {
+  margin: 0 auto;
+  width: 40%;
+  height: auto;
+  min-height: 500px;
+  border: 2px  #EEA234 solid;
+  overflow-y:scroll;
+}
+.menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+button {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #EEA234;
 }
