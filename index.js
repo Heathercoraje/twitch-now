@@ -1,19 +1,3 @@
-function makeUrl(user) {
-  var url = base + user + jsonp;
-  console.log(url);
-  return url
-}
-
-
-
-// Script and JSONP requests are not subject to the same origin policy restrictions.
-function fetchData(url, callback) {
-  $.getJSON(url, function (data) {
-    callback(data);
-  });
-}
-
-
 (function goGetThem() {
   // load all the data before hand
   // then simply append them to list
@@ -35,7 +19,6 @@ function fetchData(url, callback) {
         status = 'online'
       }
       $.getJSON(makeUrl('channels', user), function (data) {
-        console.log(data);
         $( '#all').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
 
         if (status === 'online') {
