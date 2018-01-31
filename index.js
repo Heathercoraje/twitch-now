@@ -1,5 +1,5 @@
 
-var base = 'https://wind-bow.gomix.me/twitch-api/streams/';
+var base = 'https://wind-bow.gomix.me/twitch-api/channels/';
 var jsonp ='?callback=?';
 var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
 
@@ -22,8 +22,11 @@ function fetchData(url, callback) {
 $( '#all' ).on( 'click', function() {
   users.forEach(function (user) {
     fetchData(makeUrl(user), function(data) {
-      var info = JSON.stringify(data);
-      $( '#list').append(`<div>${info}</div>`);
+      var data = data;
+      console.log(data);
+      // console.log(data.stream);
+      // console.log(data.stream.game);
+      // $( '#allList').append(`<li>${data.streams.game}</li>`);
     });
   });
 });
