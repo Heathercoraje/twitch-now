@@ -28,30 +28,17 @@ function fetchData(url, callback) {
 
   users.forEach(function (user) {
     $.getJSON(makeUrl('streams', user), function(data) {
-      var status;
+      var status, displayName, desc;
       if (data.stream === null) {
         status = 'offline';
       } else { // if it is streaming
         status = 'online'
-        var display = JSON.stringify(data.stream.game);
-        $( '#online').append(`<div>${display}</div>`)
+        displayName = data.stream.channel.display_name;
+        desc = data.stream.channel.status;
+        logo = data.stream.channel.logo; //src
+        $( '#online').append(`<div><p>${displayName}</p><p>${desc}</p></div><img src=${logo} style="width:50px; height:50px">`);
       }
 
     });
   });
 })();
-
-$( '#all' ).on( 'click', function() {
-  users.forEach(function (user) {
-    fetchData(makeUrl(user), function(data) {
-      var online;
-      console.log(data);
-      $( '#allList').append(`<li>${data.game}</li>`);
-    });
-  });
-});
-
-// users.forEach(function(user) {
-//   fetchData(makeUrl(user));
-// });
-//
