@@ -1,7 +1,4 @@
 (function goGetThem() {
-  // load all the data before hand
-  // then simply append them to list
-  // click event does not have to handled thanks to bootstrap nav-tab
   var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
   var base = 'https://wind-bow.gomix.me/twitch-api/';
   var jsonp ='?callback=?';
@@ -11,21 +8,26 @@
   }
 
   users.forEach(function (user) {
-    var status, displayName, desc;
+    let status;
     $.getJSON(makeUrl('streams', user), function (data) {
       if (data.stream === null) {
         status = 'offline';
-      } else { // if it is streaming
+      } else {
         status = 'online'
       }
       $.getJSON(makeUrl('channels', user), function (data) {
-        $( '#all').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
-
-        if (status === 'online') {
-          $( '#online').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
+        function addData(selector) {
+          let info = (status === 'online')? data.display_name + ' <br> ' + data.status : data.display_name;
+          $(selector).append(`<div class="item">
+          <img class='logoImage rounded-circle' src=${data.logo}>
+          <div><p class="detail">${info}</p></div>`);
         }
-        else { // status === 'offline'
-        $( '#offline').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
+        addData('#all');
+        if (status === 'online') {
+          addData('#online');
+        }
+        else {
+          addData('#offline');
         }
       });
     });
