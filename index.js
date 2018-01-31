@@ -27,18 +27,24 @@ function fetchData(url, callback) {
   }
 
   users.forEach(function (user) {
-    $.getJSON(makeUrl('streams', user), function(data) {
-      var status, displayName, desc;
+    var status, displayName, desc;
+    $.getJSON(makeUrl('streams', user), function (data) {
       if (data.stream === null) {
         status = 'offline';
       } else { // if it is streaming
         status = 'online'
-        displayName = data.stream.channel.display_name;
-        desc = data.stream.channel.status;
-        logo = data.stream.channel.logo; //src
-        $( '#online').append(`<div><p>${displayName}</p><p>${desc}</p></div><img src=${logo} style="width:50px; height:50px">`);
       }
+      $.getJSON(makeUrl('channels', user), function (data) {
+        console.log(data);
+        $( '#all').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
 
+        if (status === 'online') {
+          $( '#online').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
+        }
+        else { // status === 'offline'
+        $( '#offline').append(`<div><p>${data.display_name}</p><p>${data.status}</p></div><img src=${data.logo} style="width:50px; height:50px">`);
+        }
+      });
     });
   });
 })();
