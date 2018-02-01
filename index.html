@@ -15,10 +15,9 @@
       <div class="main col-md-6 container-fluid">
         <div class="col-md-12">
           <h1 class="title">Twitch-tv</h1>
-        <form class="" action="index.html" method="get">
-          <input type="text" class="form-control" id="searchForm" placeholder="Search?" name="" value="">
-        </form>
-        <ul class="nav nav-pills nav-fill" id="myTab">
+          <input list="suggestion" type="text" class="form-control" id="searchForm" placeholder="Search?" name="" value="">
+          <datalist class="suggestion" id="suggestion"></datalist>
+          <ul class="nav nav-pills nav-fill" id="myTab">
           <li class="nav-item">
             <a class="nav-link active" href="#all">All</a>
           </li>
@@ -28,11 +27,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#offline">offline</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#search">search</a>
+          </li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="all"></div>
           <div class="tab-pane" id="online"></div>
           <div class="tab-pane" id="offline"></div>
+          <div class="tab-pane" id="search"></div>
         </div>
       </div>
     </div>
