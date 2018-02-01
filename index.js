@@ -6,29 +6,41 @@
   function makeUrl(type, user) { //type is either channels or streams
     return base + type + '/' + user + jsonp;
   }
-
   users.forEach(function (user) {
-    let status;
     $.getJSON(makeUrl('streams', user), function (data) {
-      if (data.stream === null) {
+      let status;
+      console.log(data);
+      if (Boolean(data.stream === null)) {
         status = 'offline';
       } else {
-        status = 'online'
+        status = 'online';
       }
       $.getJSON(makeUrl('channels', user), function (data) {
-        function addData(selector) {
-          let info = (status === 'online')? data.display_name + ' <br> ' + data.status : data.display_name;
-          $(selector).append(`<div class="item">
-          <img class='logoImage rounded-circle' src=${data.logo}>
-          <div><p class="detail">${info}</p></div>`);
-        }
-        addData('#all');
         if (status === 'online') {
           addData('#online');
-        }
-        else {
+          //here I want to add class to change the color of icon(fa fa circle)
+
+        } else {
           addData('#offline');
         }
+        addData('#all');
+
+        // function declaration
+        function addData (selector, id) {
+          let info = (status === 'online')? data.display_name + ' <br> ' + data.status : data.display_name;
+          if (status === 'online' ) {
+            $(selector).append(`<div class="item">
+            <img class='logoImage rounded-circle' src=${data.logo}>
+            <div><p class="detail">${info}</p>
+            <a href=${data.url} target="_blank"><i class="fa fa-circle"></i></a></div>`);
+          }
+          else {
+            $(selector).append(`<div class="item">
+            <img class='logoImage rounded-circle' src=${data.logo}>
+            <div><p class="detail">${info}</p>`);
+          }
+          return
+        };
       });
     });
   });
