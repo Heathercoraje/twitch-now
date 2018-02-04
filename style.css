@@ -22,6 +22,7 @@
    padding: 1rem 1.5rem;
  }
 .search input {
+  font-size: 1.2rem;
   width: 70%;
   text-indent: 2rem;
   margin: 0 auto;
@@ -29,7 +30,7 @@
 .search .fa-search {
   color: #889297;
   position: absolute;
-  top: 1.5rem;
+  top: 1.7rem;
   left: 20%;
   font-size: 1.3rem;
 }
@@ -63,6 +64,7 @@ a {
 }
 
 .name {
+  text-transform: capitalize;
   font-weight: bold;
   font-size: 1.3rem;
   margin-bottom: 0.4rem;

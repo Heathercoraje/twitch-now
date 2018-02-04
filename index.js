@@ -1,5 +1,5 @@
 (function allInOne() {
-  var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+  var users = ["ESL_SC2", "OgamingSC2", "Cretetion", "Freecodecamp", "Storbeck", "Habathcx", "RobotCaleb", "Noobs2ninjas"];
   var base = 'https://wind-bow.gomix.me/twitch-api/';
   var jsonp ='?callback=?';
   var $online = $( '#online');
@@ -7,19 +7,6 @@
   var $search = $( '#search');
   var $all = $( '#all');
   var $searchForm = $('#searchForm');
-  var $suggestion = $('#suggestion');
-
-  // $searchForm.keydown(function() {
-  //   var key = $searchForm.val();
-  //   var filtered = users.filter(user => user.indexOf(key) !== -1);
-  //   suggestion.innerHTML= '';
-  //   filtered.forEach(function (user) {
-  //     var option = document.createElement('option');
-  //     option.value = user;
-  //     suggestion.appendChild(option);
-  //   });
-  // });
-
 
   function makeUrl(type, user) { //type is either channels or streams
     return base + type + '/' + user + jsonp;
@@ -54,7 +41,22 @@
 
     var allRes = allResponses.map(r => getMarkupForUser(r, r.status));
     $all.append(allRes);
+
+    function filterChannel() {
+      var key = $searchForm.val().toLowerCase();
+      var usersLow = users.map(u => u.toLowerCase());
+      var filtered = usersLow.filter(u => u.indexOf(key) !== -1);
+      var searchRes = allResponses.filter(r => (filtered.indexOf(r.channels.display_name.toLowerCase()) !== -1)).map(r=> getMarkupForUser(r, r.status));
+      return searchRes;
+    }
+
+    $searchForm.on('input', function() {
+      $all.empty();
+      $all.append(filterChannel());
+    });
   });
+
+
 
   function getMarkupForUser (user, isOnline) {
     // here user is each user data object
