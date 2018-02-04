@@ -1,9 +1,13 @@
-# twitch-now :tv: :movie_camera:
-Last project on intermediate Frontend project on FreeCodeCamp. Twitch-now is an web application where a user can search for online/offlife channels on Twtich.tv. Click [here]() to check it out now :stuck_out_tongue: !
+# Twitch-now :tv: :movie_camera:
+![img](/twitchDemo.png)
+
+Last project on intermediate Frontend project on FreeCodeCamp. Twitch-now is an web application where a user can search for online/offlife channels on Twtich.tv. Click [here](https://twitch-now.surge.sh/) to check it out now!
 
 ### user story
-+ User can see whether Free Code Camp is currently streaming on Twitch.tv.
-+ User can click the status output and be sent directly to the Free Code Camp's Twitch.tv channel.
-+ If a Twitch user is currently streaming, I can see additional details about what they are streaming.
++ User can see which channels are online/offline.
++ User can see whether Free Code Camp (or any channel) is currently streaming on Twitch.tv by using search box.
++ If a Twitch user is currently streaming, a user can see additional details about what they are streaming.
++ In case of streaming channles, a user can be sent directly to their Twitch.tv channel by clicking white circle.
+
 ### tech 
 HTML5, CSS with Bootstrap and Javascript with Jquery
