@@ -54,6 +54,8 @@
       $all.empty();
       $all.append(filterChannel());
     });
+
+    $('.footer').css('display','block');
   });
 
 
