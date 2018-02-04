@@ -48,6 +48,7 @@
     var onlineRes = allResponses.filter(r => r.status === 'online').map(r => getMarkupForUser(r, 'online'));
     $online.append(onlineRes);
 
+
     var offlineRes = allResponses.filter(r => r.status === 'offline').map(r => getMarkupForUser(r, 'offline'));
     $offline.append(offlineRes);
 
@@ -63,16 +64,22 @@
     });
 
     var $img = $('<img/>', {
-      class : 'logoImage rounded-circle',
+      class : 'logoImage rounded-circle leftMargin align-self-center',
       src : user.channels.logo
     });
 
     var $p = $('<p/>', {
-      class : `detail name ${isOnline} ? 'online' : 'offline'`,
-      text  : user.channels.display_name + user.channels.status
+      class : 'name',
+      text  : user.channels.display_name
     });
 
+    var $span = $('<span/>', {
+      class : 'status',
+      text : user.channels.status
+    })
+
     var $a =$('<a/>', {
+      class: 'align-self-center leftMargin',
       href : user.channels.url,
       target : '_blank'
     });
@@ -81,14 +88,17 @@
       class : 'fa fa-circle'
     });
 
-    var $result = $div.append($img).append($p);
+    var $result;
+
     if (isOnline === 'online') {
-      $a.append($i),
-      $result.append($a)
+      $result = $div.append($img).append($(('<div class="namePlus leftMargin"></div>')).append($p).append($span));
+      $a.append($i);
+      $result.append($a);
+    }
+    else {
+      $result = $div.append($img).append($('<div class="namePlus leftMargin"></div>').append($p));
     }
     return $result;
   }
-
-
 }
 )()
