@@ -8,22 +8,6 @@
   var $all = $( '#all');
   var $searchForm = $('#searchForm');
 
-
-  // this invokes whenever input changes 
-  $searchForm.on('input', function() {
-    var key = $searchForm.val().toLowerCase();
-    var usersLow = users.map(u => u.toLowerCase());
-    var real = usersLow.filter(user => user.indexOf(key) !== -1);
-    console.log('halla');
-
-  });
-
-  function filterChannel(key) {
-    // input: key value from input field
-    // output matched users
-    // then pass this to makeup function
-  }
-
   function makeUrl(type, user) { //type is either channels or streams
     return base + type + '/' + user + jsonp;
   }
@@ -57,7 +41,22 @@
 
     var allRes = allResponses.map(r => getMarkupForUser(r, r.status));
     $all.append(allRes);
+
+    function filterChannel() {
+      var key = $searchForm.val().toLowerCase();
+      var usersLow = users.map(u => u.toLowerCase());
+      var filtered = usersLow.filter(u => u.indexOf(key) !== -1);
+      var searchRes = allResponses.filter(r => (filtered.indexOf(r.channels.display_name.toLowerCase()) !== -1)).map(r=> getMarkupForUser(r, r.status));
+      return searchRes;
+    }
+
+    $searchForm.on('input', function() {
+      $all.empty();
+      $all.append(filterChannel());
+    });
   });
+
+
 
   function getMarkupForUser (user, isOnline) {
     // here user is each user data object
