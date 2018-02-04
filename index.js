@@ -1,5 +1,5 @@
 (function allInOne() {
-  var users = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+  var users = ["ESL_SC2", "OgamingSC2", "Cretetion", "Freecodecamp", "Storbeck", "Habathcx", "RobotCaleb", "Noobs2ninjas"];
   var base = 'https://wind-bow.gomix.me/twitch-api/';
   var jsonp ='?callback=?';
   var $online = $( '#online');
@@ -7,19 +7,22 @@
   var $search = $( '#search');
   var $all = $( '#all');
   var $searchForm = $('#searchForm');
-  var $suggestion = $('#suggestion');
 
-  // $searchForm.keydown(function() {
-  //   var key = $searchForm.val();
-  //   var filtered = users.filter(user => user.indexOf(key) !== -1);
-  //   suggestion.innerHTML= '';
-  //   filtered.forEach(function (user) {
-  //     var option = document.createElement('option');
-  //     option.value = user;
-  //     suggestion.appendChild(option);
-  //   });
-  // });
 
+  // this invokes whenever input changes 
+  $searchForm.on('input', function() {
+    var key = $searchForm.val().toLowerCase();
+    var usersLow = users.map(u => u.toLowerCase());
+    var real = usersLow.filter(user => user.indexOf(key) !== -1);
+    console.log('halla');
+
+  });
+
+  function filterChannel(key) {
+    // input: key value from input field
+    // output matched users
+    // then pass this to makeup function
+  }
 
   function makeUrl(type, user) { //type is either channels or streams
     return base + type + '/' + user + jsonp;
