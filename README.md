@@ -9,5 +9,5 @@ Last project on intermediate Frontend project on FreeCodeCamp. Twitch-now is an 
 + If a Twitch user is currently streaming, a user can see additional details about what they are streaming.
 + In case of streaming channles, a user can be sent directly to their Twitch.tv channel by clicking white circle.
 
-### tech 
+### Tech 
 HTML5, CSS with Bootstrap and Javascript with Jquery
