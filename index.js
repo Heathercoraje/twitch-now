@@ -2,6 +2,7 @@
   var users = ["ESL_SC2", "OgamingSC2", "Cretetion", "Freecodecamp", "Storbeck", "Habathcx", "RobotCaleb", "Noobs2ninjas"];
   var base = 'https://wind-bow.gomix.me/twitch-api/';
   var jsonp ='?callback=?';
+  // content div
   var $online = $( '#online');
   var $offline = $( '#offline');
   var $search = $( '#search');
@@ -14,8 +15,7 @@
 
   function getAllDataForUser (user) {
     return new Promise( function (resolve, reject) { // promise takes 2 function arguments
-      $.getJSON(makeUrl('streams', user), function (data) {
-        // add meta info to return object(data)
+      $.getJSON(makeUrl('streams', user), function (data) { // add meta info to return object(data)
         data.status = (data.stream === null) ? 'offline' : 'online';
         $.getJSON(makeUrl('channels', user), function (response) {
           data.channels = response;
@@ -28,13 +28,11 @@
   // apply this function to all users then this will return 8 promises
   var allData = users.map(getAllDataForUser);
 
-
-  // Promise.all(iterable) will wait 8 promises to be completed and pass it pending to allResponse
+  // Promise.all(iterable) will wait for 8 promises to be completed and pass it pending to allResponses
   Promise.all(allData).then(function(allResponses) {
 
     var onlineRes = allResponses.filter(r => r.status === 'online').map(r => getMarkupForUser(r, 'online'));
     $online.append(onlineRes);
-
 
     var offlineRes = allResponses.filter(r => r.status === 'offline').map(r => getMarkupForUser(r, 'offline'));
     $offline.append(offlineRes);
@@ -49,7 +47,7 @@
       var searchRes = allResponses.filter(r => (filtered.indexOf(r.channels.display_name.toLowerCase()) !== -1)).map(r=> getMarkupForUser(r, r.status));
       return searchRes;
     }
-
+    //update with search result
     $searchForm.on('input', function() {
       $all.empty();
       $all.append(filterChannel());
